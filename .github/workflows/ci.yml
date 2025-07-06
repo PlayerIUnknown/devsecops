@@ -56,7 +56,7 @@ jobs:
         bandit -r src/ -f txt -o bandit-report.txt || true
         
     - name: Upload security scan results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-scan-results
@@ -102,7 +102,7 @@ jobs:
         pytest tests/ -v --cov=src --cov-report=xml --cov-report=html --cov-report=term-missing
         
     - name: Upload coverage reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-reports-${{ matrix.python-version }}
         path: |
@@ -143,7 +143,7 @@ jobs:
         safety check --text --output safety-report.txt || true
         
     - name: Upload safety reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: safety-reports
@@ -158,7 +158,7 @@ jobs:
         pip-audit --format text --output pip-audit-report.txt || true
         
     - name: Upload pip-audit reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: pip-audit-reports
@@ -191,7 +191,7 @@ jobs:
         python -m build
         
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
         path: dist/ 
