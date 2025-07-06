@@ -1,1 +1,1 @@
-# DevSecOps Demo Application 
+# DevSecOps Demo Application
