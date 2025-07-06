@@ -10,7 +10,7 @@ class Calculator:
     """A simple calculator class for basic arithmetic operations."""
 
     def __init__(self) -> None:
-        self.history = []
+        self.history: list[str] = []
 
     def add(self, a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
         """Add two numbers."""
