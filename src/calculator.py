@@ -9,7 +9,7 @@ from typing import Union, Optional
 class Calculator:
     """A simple calculator class for basic arithmetic operations."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.history = []
 
     def add(self, a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
