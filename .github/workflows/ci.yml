@@ -52,8 +52,8 @@ jobs:
         
     - name: Run security scan with bandit
       run: |
-        bandit -r src/ -f json -o bandit-report.json || true
-        bandit -r src/ -f txt -o bandit-report.txt || true
+        bandit -r src/ -f json -o bandit-report.json || echo "Bandit scan completed"
+        bandit -r src/ -f txt -o bandit-report.txt || echo "Bandit scan completed"
         
     - name: Upload security scan results
       uses: actions/upload-artifact@v4
@@ -63,6 +63,7 @@ jobs:
         path: |
           bandit-report.json
           bandit-report.txt
+        if-no-files-found: warn
 
   test:
     name: Test Suite
@@ -108,6 +109,7 @@ jobs:
         path: |
           htmlcov/
           coverage.xml
+        if-no-files-found: warn
           
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
@@ -139,8 +141,8 @@ jobs:
         
     - name: Run safety check
       run: |
-        safety check --json --output safety-report.json || true
-        safety check --text --output safety-report.txt || true
+        safety check --json --output safety-report.json || echo "Safety check completed"
+        safety check --text --output safety-report.txt || echo "Safety check completed"
         
     - name: Upload safety reports
       uses: actions/upload-artifact@v4
@@ -150,12 +152,13 @@ jobs:
         path: |
           safety-report.json
           safety-report.txt
+        if-no-files-found: warn
           
     - name: Run dependency vulnerability scan
       run: |
         pip install pip-audit
-        pip-audit --format json --output pip-audit-report.json || true
-        pip-audit --format text --output pip-audit-report.txt || true
+        pip-audit --format json --output pip-audit-report.json || echo "Pip-audit scan completed"
+        pip-audit --format text --output pip-audit-report.txt || echo "Pip-audit scan completed"
         
     - name: Upload pip-audit reports
       uses: actions/upload-artifact@v4
@@ -165,6 +168,7 @@ jobs:
         path: |
           pip-audit-report.json
           pip-audit-report.txt
+        if-no-files-found: warn
 
   build:
     name: Build Package
@@ -194,4 +198,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
-        path: dist/ 
+        path: dist/
+        if-no-files-found: warn 

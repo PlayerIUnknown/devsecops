@@ -59,6 +59,7 @@ jobs:
       with:
         name: staging-build
         path: build/staging/
+        if-no-files-found: warn
 
   deploy-production:
     name: Deploy to Production
@@ -111,6 +112,7 @@ jobs:
       with:
         name: production-build
         path: build/production/
+        if-no-files-found: warn
         
     - name: Create deployment summary
       run: |
